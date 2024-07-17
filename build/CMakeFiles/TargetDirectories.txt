@@ -1,0 +1,9 @@
+/data0/users/shuaishuai3/wt/t/t1_8/build/CMakeFiles/install/strip.dir
+/data0/users/shuaishuai3/wt/t/t1_8/build/CMakeFiles/install/local.dir
+/data0/users/shuaishuai3/wt/t/t1_8/build/CMakeFiles/install.dir
+/data0/users/shuaishuai3/wt/t/t1_8/build/CMakeFiles/list_install_components.dir
+/data0/users/shuaishuai3/wt/t/t1_8/build/CMakeFiles/edit_cache.dir
+/data0/users/shuaishuai3/wt/t/t1_8/build/CMakeFiles/rebuild_cache.dir
+/data0/users/shuaishuai3/wt/t/t1_8/build/CMakeFiles/pytrain.dir
+/data0/users/shuaishuai3/wt/t/t1_8/build/CMakeFiles/client.dir
+/data0/users/shuaishuai3/wt/t/t1_8/build/CMakeFiles/server.dir

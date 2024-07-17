@@ -1,0 +1,28 @@
+syntax="proto3";
+
+package wt;
+
+message PredictRequest {
+	repeated float feature = 1;
+	int32 sample_size = 2;
+	string model_name = 3;
+}
+message PredictReply {
+	repeated float result = 1;
+}
+
+message TrainRequest {
+	repeated float x = 1;
+	repeated float y = 2;
+	int32 batch_size = 3;
+	string model_name = 4;
+}
+message TrainReply {
+	repeated float result = 1;
+}
+
+// 指定服务的名称，作为生成代码里面的二级namespace
+service Caca {
+	rpc score(PredictRequest) returns (PredictReply) {}
+	rpc training(TrainRequest) returns (TrainReply) {}
+}
