@@ -2,12 +2,11 @@ import tensorflow as tf
 import os, json
 import numpy as np
 
-BATCH_SIZE = 1024  	# batch的数量
-LEARNING_RATE = 0.05  	# 初始学习率
+BATCH_SIZE = 1024  	
+LEARNING_RATE = 0.05 
 PB_SAVE_PATH='./model_pb/'
 CONF_SAVE_PATH='./model_conf/'
 MODEL_NAME='xxxxxxxxxx'
-ABSOLUT_PATH = "/data0/users/shuaishuai3/wt/t/t1_8/model/"
 
 # 权重w计算
 def get_weight(shape, regularizer, name):
@@ -61,15 +60,15 @@ if __name__ == '__main__':
             param_list.append(var.op.name)
             d_param_list.append("d-" + var.op.name)
         other_conf = {
-                        'dense': param_list,
-                        'gradient': d_param_list,
-                        'batch_size': BATCH_SIZE,
-                        'input_size': [BATCH_SIZE, IMAGE_SIZE, IMAGE_SIZE, NUM_CHANNELS],
-                        'output_size': [BATCH_SIZE, 1],
-                        'observe': ['loss', 'accuracy'],
-                        'model_name': MODEL_NAME,
-                        'learning_rate': LEARNING_RATE,
-			'pb_path': './model_pb/' + MODEL_NAME + '.pb'
+                        'dense': 	param_list,
+                        'gradient': 	d_param_list,
+                        'batch_size': 	BATCH_SIZE,
+                        'input_size': 	[BATCH_SIZE, IMAGE_SIZE, IMAGE_SIZE, NUM_CHANNELS],
+                        'output_size': 	[BATCH_SIZE, 1],
+                        'observe': 	['loss', 'accuracy'],
+                        'model_name': 	MODEL_NAME,
+                        'learning_rate':LEARNING_RATE,
+			'pb_path': 	'../model/model_pb/' + MODEL_NAME + '.pb'
                      }
         conf['other'] = other_conf
         conf['dense_shape'] = shape_conf

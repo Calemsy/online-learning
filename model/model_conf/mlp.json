@@ -1,0 +1,67 @@
+{
+    "other": {
+        "dense": [
+            "w1",
+            "b1",
+            "w2",
+            "b2"
+        ],
+        "gradient": [
+            "d-w1",
+            "d-b1",
+            "d-w2",
+            "d-b2"
+        ],
+        "batch_size": 1024,
+        "input_size": [
+            1024,
+            784
+        ],
+        "output_size": [
+            1024,
+            1
+        ],
+        "class_num": 10,
+        "observe": [
+            "loss",
+            "accuracy"
+        ],
+        "model_name": "mlp",
+        "learning_rate": 0.05,
+        "pb_path": "../model/model_pb/mlp.pb"
+    },
+    "dense_shape": {
+        "w1": [
+            784,
+            500
+        ],
+        "d-w1": [
+            784,
+            500
+        ],
+        "b1": [
+            1,
+            500
+        ],
+        "d-b1": [
+            1,
+            500
+        ],
+        "w2": [
+            500,
+            10
+        ],
+        "d-w2": [
+            500,
+            10
+        ],
+        "b2": [
+            1,
+            10
+        ],
+        "d-b2": [
+            1,
+            10
+        ]
+    }
+}

@@ -1,0 +1,131 @@
+{
+    "other": {
+        "dense": [
+            "conv1_w",
+            "conv1_b",
+            "conv2_w",
+            "conv2_b",
+            "conv3_w",
+            "conv3_b",
+            "fc1_w",
+            "fc1_b",
+            "fc2_w",
+            "fc2_b"
+        ],
+        "gradient": [
+            "d-conv1_w",
+            "d-conv1_b",
+            "d-conv2_w",
+            "d-conv2_b",
+            "d-conv3_w",
+            "d-conv3_b",
+            "d-fc1_w",
+            "d-fc1_b",
+            "d-fc2_w",
+            "d-fc2_b"
+        ],
+        "batch_size": 1024,
+        "input_size": [
+            1024,
+            28,
+            28,
+            1
+        ],
+        "output_size": [
+            1024,
+            1
+        ],
+        "class_num": 27,
+        "observe": [
+            "loss",
+            "accuracy"
+        ],
+        "model_name": "vgg",
+        "learning_rate": 0.05,
+        "pb_path": "../model/model_pb/vgg.pb"
+    },
+    "dense_shape": {
+        "conv1_w": [
+            3,
+            3,
+            1,
+            64
+        ],
+        "d-conv1_w": [
+            3,
+            3,
+            1,
+            64
+        ],
+        "conv1_b": [
+            64
+        ],
+        "d-conv1_b": [
+            64
+        ],
+        "conv2_w": [
+            3,
+            3,
+            64,
+            128
+        ],
+        "d-conv2_w": [
+            3,
+            3,
+            64,
+            128
+        ],
+        "conv2_b": [
+            128
+        ],
+        "d-conv2_b": [
+            128
+        ],
+        "conv3_w": [
+            3,
+            3,
+            128,
+            256
+        ],
+        "d-conv3_w": [
+            3,
+            3,
+            128,
+            256
+        ],
+        "conv3_b": [
+            256
+        ],
+        "d-conv3_b": [
+            256
+        ],
+        "fc1_w": [
+            4096,
+            512
+        ],
+        "d-fc1_w": [
+            4096,
+            512
+        ],
+        "fc1_b": [
+            512
+        ],
+        "d-fc1_b": [
+            512
+        ],
+        "fc2_w": [
+            512,
+            27
+        ],
+        "d-fc2_w": [
+            512,
+            27
+        ],
+        "fc2_b": [
+            27
+        ],
+        "d-fc2_b": [
+            27
+        ]
+    }
+}

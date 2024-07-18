@@ -5,9 +5,9 @@
 
 using namespace tensorflow;
 
-class Run_Env {
+class TFRunEnv {
 public:
-	Run_Env(const std::string graph_path) : graph_path(graph_path) {
+	TFRunEnv(const std::string graph_path) : graph_path(graph_path) {
 		// Initialize a tensorflow session
 		TF_CHECK_OK(NewSession(SessionOptions(), &session));
         	// Read in the protobuf graph we exported
@@ -16,9 +16,8 @@ public:
         	TF_CHECK_OK(session->Create(graph_def));
 	}
 public:
-	Session* session;
-private:
-	GraphDef graph_def;
-	const std::string graph_path;
+	Session* 		session;
+	GraphDef 		graph_def;
+	const std::string 	graph_path;
 };
 

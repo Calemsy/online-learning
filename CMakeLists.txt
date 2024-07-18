@@ -1,46 +1,84 @@
-#指定 cmake 的最小版本
 cmake_minimum_required(VERSION 2.8.8)
 
-#项目名称/工程名
-project(wt)
+project(onlearning)
+
+add_definitions(-w)
 
 # Set C++14 as standard for the whole project
-set(CMAKE_CXX_STANDARD 14)
-set(TENSORFLOW_DIR /data0/users/shuaishuai3/wt)
+set(CMAKE_CXX_STANDARD 20)
 
-# 将源码目录保存到变量中
 aux_source_directory(./proto DIR_SRCS) 
 
-find_package(PkgConfig REQUIRED)
-pkg_search_module(protobuf REQUIRED protobuf)
+# find_package(PkgConfig REQUIRED)
+# pkg_search_module(protobuf REQUIRED protobuf)
+find_package(Python 3.6.5 REQUIRED COMPONENTS Interpreter Development)
+find_package(Protobuf REQUIRED)
+if (Protobuf_FOUND)
+    message(STATUS "Found Protobuf version: ${Protobuf_VERSION}")
+else()
+    message(FATAL_ERROR "Could not find Protobuf")
+endif()
 
-#设置包含的目录，项目中的include路径
+# -I
 include_directories(
-	/usr/local/include
-	${TENSORFLOW_DIR}/tensorflow-1.15.0
-	${TENSORFLOW_DIR}/output_base/external/eigen_archive
-	${TENSORFLOW_DIR}/abseil-cpp
-	./third_part/includes
+		/usr/local/include
+		./third_part/includes
+		./third_part/includes/output_base/external/eigen_archive
+		./third_part/includes/abseil-cpp
 )
 
-#添加非标准动态链接库目录
-link_directories(/usr/local/lib
-		/data1/shiduo/anaconda2/envs/py36t/lib
-		${TENSORFLOW_DIR}/grpc/cmake/build
-		${TENSORFLOW_DIR}/grpc/cmake/build/third_party/cares/cares/lib
-		${TENSORFLOW_DIR}/grpc/cmake/build/third_party/zlib
-		${TENSORFLOW_DIR}/tensorflow-1.15.0/bazel-bin/tensorflow
-		./third_part/libs
-)
+# -L
+link_directories(/usr/local/lib ./third_part/libs)
 
-#生成可执行文件
-add_executable(server ../src/server.cpp ${DIR_SRCS})
-add_executable(client ../src/client.cpp ${DIR_SRCS})
+# -o
+add_executable(tol_server ../src/server.cpp ${DIR_SRCS})
+add_executable(tol_client ../src/client.cpp ${DIR_SRCS})
 add_library(pytrain SHARED ../src/bindpy.cpp)
-install(TARGETS pytrain LIBRARY DESTINATION ${PROJECT_SOURCE_DIR}/src)
-message(STATUS ${PROJECT_SOURCE_DIR}/src/)
+add_executable(ps_server ../ps/ps_server.cpp)
 
-#设置 target 需要链接的库
-target_link_libraries(server libtensorflow_cc.so libtensorflow_framework.so grpc++_reflection grpc grpc++ dl pthread grpc_unsecure address_sorting gpr cares z jsoncpp python3.6m)
-target_link_libraries(client libtensorflow_cc.so libtensorflow_framework.so grpc++_reflection grpc grpc++ dl pthread grpc_unsecure address_sorting gpr cares z boost_program_options)
-target_link_libraries(pytrain libtensorflow_cc.so libtensorflow_framework.so grpc++_reflection grpc grpc++ dl pthread grpc_unsecure address_sorting gpr cares z jsoncpp)
+install(TARGETS pytrain LIBRARY DESTINATION ${PROJECT_SOURCE_DIR}/bin)
+install(TARGETS tol_server DESTINATION ${PROJECT_SOURCE_DIR}/bin)
+install(TARGETS tol_client DESTINATION ${PROJECT_SOURCE_DIR}/bin)
+install(TARGETS ps_server DESTINATION ${PROJECT_SOURCE_DIR}/bin)
+
+# -l
+target_link_libraries(tol_server 
+				libtensorflow_cc.so 
+				libtensorflow_framework.so 
+				grpc++_reflection 
+				grpc++ 
+				dl 
+				pthread 
+				grpc_unsecure 
+				address_sorting 
+				gpr 
+				cares 
+				z 
+				ps
+				protobuf
+				zmq
+				boost_program_options)
+target_link_libraries(tol_client
+			 	libtensorflow_cc.so 
+				libtensorflow_framework.so 
+				grpc++_reflection 
+				grpc++ 
+				dl 
+				pthread 
+				grpc_unsecure 
+				address_sorting 
+				gpr 
+				cares 
+				z 
+				boost_program_options)
+target_link_libraries(pytrain 	libtensorflow_cc.so 
+				libtensorflow_framework.so
+				ps
+				zmq
+				Python::Python
+				jsoncpp)
+target_link_libraries(ps_server ps
+				boost_program_options
+				protobuf
+				zmq
+				pthread)

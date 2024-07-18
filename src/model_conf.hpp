@@ -1,24 +1,22 @@
 #include <iostream>
+#include "../utils/common.h"
 #include "json.h"
 #include <fstream>
 #include <algorithm>
 #include <vector>
 
 #define PARSE_VALUE(member, type) member = root["other"][#member].as##type();
-
 #define PARSE_LIST_VALUE(member, type)							\
 for(unsigned int i = 0; i < root["other"][#member].size(); ++i) {			\
 member##_vec.push_back(root["other"][#member][i].as##type());			        \
 }
+#define PRINT(v) {cout << #v << ":" << v << " ";}
 
-#define PRINT_V(v) cout << #v << ":[";for(size_t i = 0; i < v.size(); ++i) cout << v[i] << ",]"[i==v.size()-1];cout << ",";
-#define PRINT_VV(vv) cout << #vv << ":[";for_each(vv.begin(), vv.end(), [](const auto& _){PRINT_V(_)});cout << "\b]";
-
-class model_conf {
-friend std::ostream& operator<<(std::ostream& out, const model_conf& model);
+class ModelConf {
+friend std::ostream& operator<<(std::ostream& out, const ModelConf& model);
 public:
-	model_conf() = delete;
-	model_conf(const std::string& json_path) : json_path(json_path) {
+	ModelConf() = delete;
+	ModelConf(const std::string& json_path) : json_path(json_path) {
 		read_from_file();
 	}
 	const std::vector<std::string>& get_dense_name_vec() const 	{return dense_vec;}
@@ -38,6 +36,10 @@ private:
 		Json::Reader reader;
 		Json::Value root;
 		std::ifstream infile(json_path);
+		if (!infile) {
+			OUTERR("json_path " + json_path + " is error")
+			exit(-1);
+		}
 		if(reader.parse(infile, root)) {
 			PARSE_LIST_VALUE(dense, String)
 			PARSE_LIST_VALUE(gradient, String)
@@ -60,27 +62,27 @@ private:
 private:
 	std::vector<std::string> dense_vec, gradient_vec, observe_vec;
 	std::vector<std::vector<size_t>> dense_shape;
-	const std::string json_path;
-	std::string pb_path;
-	size_t batch_size;
-	size_t class_num;
 	std::vector<size_t> input_size_vec;
 	std::vector<size_t> output_size_vec;
+	const std::string json_path;
+	std::string pb_path;
 	std::string model_name;
+	size_t batch_size;
+	size_t class_num;
 };
 
-std::ostream& operator<<(std::ostream& out, const model_conf& model) {
+std::ostream& operator<<(std::ostream& out, const ModelConf& model) {
 	out << "model_info:{";
-	out << "model_name:" << model.model_name;
-	out << ",pb_path:" << model.pb_path;
-	out << ",batch_size:" << model.batch_size;
-	out << ",class_num:" << model.class_num << ",";
-	PRINT_V(model.dense_vec)
-	PRINT_V(model.gradient_vec)
-	PRINT_V(model.input_size_vec)
-	PRINT_V(model.output_size_vec)
-	PRINT_V(model.observe_vec)
-	PRINT_VV(model.dense_shape)
+	PRINT(model.model_name)
+        PRINT(model.pb_path)
+        PRINT(model.batch_size)
+        PRINT(model.class_num)
+	PRINT(model.dense_vec)
+	PRINT(model.gradient_vec)
+	PRINT(model.input_size_vec)
+	PRINT(model.output_size_vec)
+	PRINT(model.observe_vec)
+	PRINT(model.dense_shape)
 	out << "}\n";
 	return out;
 }

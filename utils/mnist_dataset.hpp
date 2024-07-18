@@ -1,4 +1,5 @@
 #include "xnist_dataset.hpp"
+#include "common.h"
 
 class mnist_dataset : public xnist_dataset {
 public:
@@ -14,10 +15,10 @@ public:
 	}
 
 private:
-    	const string path = "../data/mnist/";
-    	string train_x_path = path + "train-images-idx3-ubyte";
-    	string train_y_path = path + "train-labels-idx1-ubyte";
-    	string test_x_path = path + "t10k-images-idx3-ubyte";
-    	string test_y_path = path + "t10k-labels-idx1-ubyte";
+    	const string path   = "../data/mnist/";
+    	const string train_x_path = path + "train-images-idx3-ubyte";
+    	const string train_y_path = path + "train-labels-idx1-ubyte";
+    	const string test_x_path  = path + "t10k-images-idx3-ubyte";
+    	const string test_y_path  = path + "t10k-labels-idx1-ubyte";
 };
 

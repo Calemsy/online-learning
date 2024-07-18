@@ -1,0 +1,36 @@
+{
+    "other": {
+        "dense": [
+            "v"
+        ],
+        "gradient": [
+            "d-v"
+        ],
+        "batch_size": 1024,
+        "input_size": [
+            1024,
+            39
+        ],
+        "output_size": [
+            1024,
+            1
+        ],
+        "observe": [
+            "loss",
+            "auc_value"
+        ],
+        "model_name": "lr",
+        "learning_rate": 0.05,
+        "pb_path": "../model/model_pb/lr.pb"
+    },
+    "dense_shape": {
+        "v": [
+            65536,
+            1
+        ],
+        "d-v": [
+            65536,
+            1
+        ]
+    }
+}

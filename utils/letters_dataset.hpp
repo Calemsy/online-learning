@@ -15,9 +15,9 @@ public:
 
 private:
     	const string path = "../data/letters/";
-    	string train_x_path = path + "emnist-letters-train-images-idx3-ubyte"; 
-    	string train_y_path = path + "emnist-letters-train-labels-idx1-ubyte";
-    	string test_x_path = path + "emnist-letters-test-images-idx3-ubyte";
-    	string test_y_path = path + "emnist-letters-test-labels-idx1-ubyte";
+    	const string train_x_path = path + "emnist-letters-train-images-idx3-ubyte"; 
+    	const string train_y_path = path + "emnist-letters-train-labels-idx1-ubyte";
+    	const string test_x_path  = path + "emnist-letters-test-images-idx3-ubyte";
+    	const string test_y_path  = path + "emnist-letters-test-labels-idx1-ubyte";
 };
 

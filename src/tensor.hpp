@@ -1,7 +1,10 @@
-#pragma once
+#ifndef OL_TENSOR
+#define OL_TENSOR
 #include "tensorflow/core/framework/tensor.h"
+#include <vector>
 
 using namespace tensorflow;
+using namespace std;
 
 template <typename T>
 Tensor make_tensor(const vector<T>& data, const vector<size_t>& dims) {
@@ -14,9 +17,9 @@ Tensor make_tensor(const vector<T>& data, const vector<size_t>& dims) {
 }
 
 template <typename T1, typename T2>
-class make_io_tensor {
+class MakeIOTensor {
 public:
-        make_io_tensor(const vector<T1>& x_data, const vector<size_t>&& x_shape, const vector<T2>& y_data, const vector<size_t>& y_shape)
+        MakeIOTensor(const vector<T1>& x_data, const vector<size_t>&& x_shape, const vector<T2>& y_data, const vector<size_t>& y_shape)
                         : x_data(x_data)
                         , x_shape(x_shape)
                         , y_data(y_data)
@@ -31,3 +34,4 @@ private:
         const vector<T1> x_data;
         const vector<T2> y_data;
 };
+#endif

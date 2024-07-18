@@ -1,0 +1,56 @@
+{
+    "other": {
+        "dense": [
+            "w0",
+            "w",
+            "v"
+        ],
+        "gradient": [
+            "d-w0",
+            "d-w",
+            "d-v"
+        ],
+        "batch_size": 1024,
+        "input_size": [
+            1024,
+            39
+        ],
+        "output_size": [
+            1024,
+            1
+        ],
+        "observe": [
+            "loss",
+            "auc_value"
+        ],
+        "model_name": "fm",
+        "learning_rate": 0.05,
+        "pb_path": "../model/model_pb/fm.pb"
+    },
+    "dense_shape": {
+        "w0": [
+            1,
+            1
+        ],
+        "d-w0": [
+            1,
+            1
+        ],
+        "w": [
+            65536,
+            1
+        ],
+        "d-w": [
+            65536,
+            1
+        ],
+        "v": [
+            65536,
+            16
+        ],
+        "d-v": [
+            65536,
+            16
+        ]
+    }
+}

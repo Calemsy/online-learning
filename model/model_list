@@ -1,0 +1,9 @@
+lenet	0
+mlp	1
+vgg	2
+lr	3
+fm	4
+afm	5
+ffm	6
+nfm	7
+widedeep	8

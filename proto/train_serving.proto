@@ -21,7 +21,6 @@ message TrainReply {
 	repeated float result = 1;
 }
 
-// 指定服务的名称，作为生成代码里面的二级namespace
 service Caca {
 	rpc score(PredictRequest) returns (PredictReply) {}
 	rpc training(TrainRequest) returns (TrainReply) {}

@@ -1,21 +1,24 @@
 #pragma once
 #include "dataset.hpp"
+#include "common.h"
+#include <algorithm>
 
 class xnist_dataset : public dataset {
 public:
     	xnist_dataset(const int total_train_x): total(total_train_x) {}
 
-        virtual void next_batch(vector<float>& x, vector<float>& y, const size_t batch_size = 1024) const override {
-                static default_random_engine e;
-                static uniform_int_distribution<unsigned >u(0, total - 1);
-                vector<unsigned> ret;
-                for(size_t i = 0; i < batch_size; i++) {
-                        ret.push_back(u(e));
-                }
+        virtual pair<vector<float>, vector<float>> next_batch(const size_t batch_size = 1024) const override {
+                random_device rd;  // Will be used to obtain a seed for the random number engine
+        	std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
+        	std::uniform_real_distribution<> dis(0, total - 1);
+                vector<unsigned> ret(batch_size);
+		std::generate(ret.begin(), ret.end(), [&dis, &gen](){return dis(gen);});
+		vector<float> x, y;
                 for (const auto r : ret) {
                         x.insert(x.end(), train_x_vec.begin() + r * rows * cols, train_x_vec.begin() + (r + 1) * rows * cols);
                         y.push_back(train_y_vec[r]);
                 }
+		return make_pair(move(x), move(y));
         }
 
 	virtual ~xnist_dataset() = default;
@@ -32,7 +35,7 @@ protected:
 		for(uint32_t i = 0; i < num * rows * cols; ++i) {
             		image.push_back(_read_uint8(fin));
         	}
-		cout << "read: " << path << " done, size=" << image.size() << endl;
+		OUTLOG("read: " + path + " done, size " + std::to_string(image.size()))
 		this->num = num; 
 		this->rows = rows;
 		this->cols = cols;
@@ -47,7 +50,7 @@ protected:
 		for (uint32_t i = 0; i < num; ++i) {
 		 	label.push_back(_read_uint8(fin));
 		}
-		cout << "read: " << path << " done, size=" << label.size() << endl;
+		OUTLOG("read: " + path + " done, size " + std::to_string(label.size()))
 		return std::move(label);
     	}
     	uint32_t _read_uint32(ifstream& is) {
