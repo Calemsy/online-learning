@@ -20,7 +20,7 @@ This `trainer` obtains samples (`x` and `y`) from the real-time stream, pulls th
 
 The above functions such as reading the model, populating data, calculating gradients, and interacting with the `ps` are encapsulated and implemented by `c++`, and an invokable interface is provided through `grpc`. Therefore, you can consume data from `kafka` through a `flink` task, and after accumulating enough data for a `batch` in the counting window, call the `grpc` service provided by `c++` to perform real-time online learning of the model.
 
-![](https://www.helloimg.com/i/2024/11/24/6741fd26aacab.png)
+![](https://github.com/Calemsy/online-learning/blob/master/utils/architecture.jpg)
 
 ### 2. How to Use
 
