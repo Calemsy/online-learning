@@ -54,6 +54,37 @@ ps aux | grep ps_server | awk '{print $2}' | xargs kill -15
 # 6、exit completely
 ps aux | grep ps_server | awk '{print $2}' | xargs kill -9
 ```
+### 3、Other
+#### 3.1、tensorflow api
+```c++
+  virtual Status Run(const std::vector<std::pair<string, Tensor> >& inputs,
+                     const std::vector<string>& output_tensor_names,
+                     const std::vector<string>& target_node_names,
+                     std::vector<Tensor>* outputs) = 0;
+```
+
+Runs the graph with the provided input tensors and fills `outputs` for the endpoints specified in `output_tensor_names`. Runs to but does not return Tensors for the nodes in `target_node_names`. 
+
+The order of tensors in `outputs` will match the order provided by `output_tensor_names`.
+
+If `Run` returns `OK()`, then `outputs->size()` will be equal to `output_tensor_names.size()`. If `Run` does not return `OK()`, the state of `outputs` is undefined.
+
+REQUIRES: The name of each Tensor of the input or output must match a "Tensor endpoint" in the `GraphDef` passed to `Create()`.
+
+REQUIRES: At least one of `output_tensor_names` and  `target_node_names` must be non-empty.
+
+REQUIRES: outputs is not nullptr if `output_tensor_names` is non-empty.
+
+#### 3.2、dependency
+
+|    Env     |        Version        |
+| :--------: | :-------------------: |
+|    grpc    | v1.23.1(protobuf:3.8) |
+| tensorflow |        v1.15.0        |
+|    gcc     |        v7.3.1         |
+|   Bazel    |        v0.26.1        |
+|   python   |         v3.6          |
+```
 
 
 
