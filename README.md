@@ -84,7 +84,18 @@ REQUIRES: outputs is not nullptr if `output_tensor_names` is non-empty.
 |    gcc     |        v7.3.1         |
 |   Bazel    |        v0.26.1        |
 |   python   |         v3.6          |
-```
 
 
+#### 3.3、models
 
+| model    | py-url                                                       |
+| -------- | ------------------------------------------------------------ |
+| lenet    | https://github.com/Calemsy/online-learning/blob/master/model/lenet.py |
+| mlp      | https://github.com/Calemsy/online-learning/blob/master/model/mlp.py |
+| vgg      | https://github.com/Calemsy/online-learning/blob/master/model/vgg.py |
+| lr       | https://github.com/Calemsy/online-learning/blob/master/model/lr.py |
+| fm       | https://github.com/Calemsy/online-learning/blob/master/model/fm.py |
+| ffm      | https://github.com/Calemsy/online-learning/blob/master/model/ffm.py |
+| afm      | https://github.com/Calemsy/online-learning/blob/master/model/afm.py |
+| nfm      | https://github.com/Calemsy/online-learning/blob/master/model/nfm.py |
+| widedeep | https://github.com/Calemsy/online-learning/blob/master/model/widedeep.py |
